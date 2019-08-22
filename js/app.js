@@ -96,6 +96,7 @@ function app() {
     { shortName: 'Sam', longName: 'Samedi' },
   ];
   const calendarDiv = $('#date-epreuve .calendrier');
+  const dateEpreuveInput = $('#date-epreuve #inp-date-epreuve');
   function createMonthCalendar(year, month) {
     const startMonth = new Date(year, month - 1, 1);
     const nbJours = (new Date(year, month, 1).getTime() - startMonth.getTime()) / 86400000;
@@ -108,8 +109,20 @@ function app() {
     thead.appendChild(tr);
     let th = document.createElement('th');
     tr.appendChild(th);
-    th.setAttribute('colspan', 7);
+    let btn = document.createElement('button');
+    btn.textContent = '<';
+    btn.classList.add('next');
+    th.appendChild(btn);
+    th = document.createElement('th');
+    tr.appendChild(th);
+    th.setAttribute('colspan', 5);
     th.innerHTML = mois[startMonth.getMonth()].longName + ' ' + year;
+    th = document.createElement('th');
+    tr.appendChild(th);
+    btn = document.createElement('button');
+    btn.textContent = '>';
+    btn.classList.add('prev');
+    th.appendChild(btn);
     const tbody = document.createElement('tbody');
     table.appendChild(tbody);
     tr = document.createElement('tr');
@@ -129,7 +142,11 @@ function app() {
         tr.appendChild(td);
         let jour = (j * 7 + i) - dow + 1;
         if (jour > 0 && jour <= nbJours) {
-          td.innerHTML = jour;
+          const btn = document.createElement('button');
+          btn.value = ((jour < 10) ? '0' : '') + jour + '/' +
+            ((month < 10) ? '0' : '') + month + '/' + year;
+          btn.textContent = jour;
+          td.appendChild(btn);
         } else {
           td.innerHTML = '&nbsp;';
         }
@@ -137,13 +154,85 @@ function app() {
     }
     return table;
   }
-  const displayCalendar = (month, year) => {
+  const displayCalendar = (month, year, selectedDate) => {
+    let pDate;
+    try {
+      pDate = parseDate(selectedDate);
+    } catch (err) {
+      pDate = { jour: 0, mois: 0, annee: 0 };
+    }
     const cal = createMonthCalendar(year, month);
+    calendarDiv.html('');
     calendarDiv[0].appendChild(cal);
+    calendarDiv.find('thead button.next').click((e) => {
+      month += 1;
+      if (month > 12) {
+        month = 1;
+        year += 1;
+      }
+      displayCalendar(month, year, selectedDate);
+    });
+    calendarDiv.find('thead button.prev').click((e) => {
+      month -= 1;
+      if (month < 1) {
+        month = 12;
+        year -= 1;
+      }
+      displayCalendar(month, year, selectedDate);
+    });
+    calendarDiv.find('tbody button')
+      .click((e) => {
+        selectDateEpreuve(e.target.value);
+      });
+    calendarDiv.find('tbody button').each(function () {
+      const elem = $(this);
+      if (year === pDate.annee && month === pDate.mois && +elem.text() === pDate.jour) {
+        elem.addClass('active');
+      } else if (elem.hasClass('active')) {
+        elem.removeClass('active');
+      }
+    });
   };
   const parseDate = (date) => {
     const dateRegExp = /^(0[1-9]|[1-2][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-
+    if (!dateRegExp.test(date)) {
+      throw new Error('La date doit être valide au format jj/mm/aaaa.');
+    }
+    const [jj, mm, aaaa] = date.split('/').map(v => +v);
+    let nbj;
+    switch (mm) {
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+        nbj = 31;
+        break;
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        nbj = 30;
+        break;
+      case 2:
+        nbj = 28 + +((aaaa % 4 !== 100 && aaaa % 4 === 0) || (aaaa % 400 === 0));
+    }
+    if (jj < 1 || jj > nbj) {
+      throw new Error('La journée doit être une valeur comprise entre 1 et ' + nbj + '.');
+    }
+    return { jour: jj, mois: mm, annee: aaaa };
+  };
+  const selectDateEpreuve = (date) => {
+    try {
+      const spDate = parseDate(date);
+      data.dateEpreuve = date;
+      dateEpreuveInput.val(date);
+      displayCalendar(spDate.mois, spDate.annee, date);
+    } catch (e) {
+      console.log(e);
+    }
   };
   //-----------------------------------------------------
   const nomPrenomInput = $('#nom #inp-nom');
@@ -164,7 +253,7 @@ function app() {
     classe: 'رابعة علوم تقنية 3',
     nomPrenom: 'محمد أنيس ماني',
     lycee: 'معهد حمام سوسة',
-    date: '01/04/2019'
+    dateEpreuve: '01/04/2019'
   };
   //-----------------------------------------------------
   genres.click((e) => {
@@ -192,10 +281,18 @@ function app() {
   lyceeInput.keydown((e) => {
     if (e.which === 13) {
       selectLycee(lyceeInput.val());
-      selectLycee(data.lycee);
+      selectDateEpreuve(data.dateEpreuve);
     }
     showPage(4, false);
     showPage(5);
+  });
+  dateEpreuveInput.keydown((e) => {
+    if (e.which === 13) {
+      selectDateEpreuve(dateEpreuveInput.val());
+      selectDateEpreuve(data.dateEpreuve);
+    }
+    showPage(5, false);
+    showPage(6);
   });
   //-----------------------------------------------------
   hideAllPages();

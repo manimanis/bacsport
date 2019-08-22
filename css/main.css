@@ -273,7 +273,23 @@ tr[data-familles] td, tr[data-difficultes] td {
 }
 
 #date-epreuve .calendrier .calendar {
+    font-family: sans-serif;
+    font-size: 8pt;
+    border-collapse: collapse;
     margin: 0 auto;
+}
+
+#date-epreuve button {
+    width: 100%;
+    height: 2em;
+    border: 0;
+    background-color: #666;
+    color: #fff;
+    border-radius: 2px;
+}
+
+#date-epreuve button.active {
+    background-color: #009688;
 }
 
 #familles {
