@@ -176,7 +176,7 @@ tr[data-familles] td, tr[data-difficultes] td {
 }
 
 #genre h2, #sections h2, #classe h2, #nom h2, #lycee h2, #date-epreuve h2 {
-    font-size: 3em;
+    font-size: 1.75em;
 }
 
 #genre .genre {
@@ -266,10 +266,14 @@ tr[data-familles] td, tr[data-difficultes] td {
 #inp-lycee, #inp-nom, #inp-date-epreuve {
     text-align: center;
     display: block;
-    margin: 1em 0.2em;
+    margin: 0.5em 0.2em;
     padding: 0.2em;
     font-size: 2em;
     width: calc(100% - 0.9em);
+}
+
+#date-epreuve .calendrier .calendar {
+    margin: 0 auto;
 }
 
 #familles {

@@ -72,6 +72,80 @@ function app() {
     });
   };
   //-----------------------------------------------------
+  const mois = [
+    { shortName: 'Jan', longName: 'Janvier' },
+    { shortName: 'Fév', longName: 'Février' },
+    { shortName: 'Mar', longName: 'Mars' },
+    { shortName: 'Avr', longName: 'Avril' },
+    { shortName: 'Mai', longName: 'Mai' },
+    { shortName: 'Juin', longName: 'Juin' },
+    { shortName: 'Juil', longName: 'Juillet' },
+    { shortName: 'Aoû', longName: 'Août' },
+    { shortName: 'Sep', longName: 'Septembre' },
+    { shortName: 'Oct', longName: 'Octobre' },
+    { shortName: 'Nov', longName: 'Novembre' },
+    { shortName: 'Déc', longName: 'Décembre' }
+  ];
+  const jours = [
+    { shortName: 'Dim', longName: 'Dimanche' },
+    { shortName: 'Lun', longName: 'Lundi' },
+    { shortName: 'Mar', longName: 'Mardi' },
+    { shortName: 'Mer', longName: 'Mercredi' },
+    { shortName: 'Jeu', longName: 'Jeudi' },
+    { shortName: 'Ven', longName: 'Vendredi' },
+    { shortName: 'Sam', longName: 'Samedi' },
+  ];
+  const calendarDiv = $('#date-epreuve .calendrier');
+  function createMonthCalendar(year, month) {
+    const startMonth = new Date(year, month - 1, 1);
+    const nbJours = (new Date(year, month, 1).getTime() - startMonth.getTime()) / 86400000;
+    let dow = startMonth.getDay();
+    const table = document.createElement('table');
+    table.className = 'calendar';
+    const thead = document.createElement('thead');
+    table.appendChild(thead);
+    let tr = document.createElement('tr');
+    thead.appendChild(tr);
+    let th = document.createElement('th');
+    tr.appendChild(th);
+    th.setAttribute('colspan', 7);
+    th.innerHTML = mois[startMonth.getMonth()].longName + ' ' + year;
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    tr = document.createElement('tr');
+    tbody.appendChild(tr);
+    for (let i = 0; i < jours.length; i++) {
+      let th = document.createElement('th');
+      if (i == 0) th.className = 'end_of_week';
+      tr.appendChild(th);
+      th.innerHTML = jours[i].shortName;
+    }
+    for (let j = 0; j < 6; j++) {
+      let tr = document.createElement('tr');
+      tbody.appendChild(tr);
+      for (let i = 0; i < 7; i++) {
+        let td = document.createElement('td');
+        if (i == 0) td.className = 'end_of_week';
+        tr.appendChild(td);
+        let jour = (j * 7 + i) - dow + 1;
+        if (jour > 0 && jour <= nbJours) {
+          td.innerHTML = jour;
+        } else {
+          td.innerHTML = '&nbsp;';
+        }
+      }
+    }
+    return table;
+  }
+  const displayCalendar = (month, year) => {
+    const cal = createMonthCalendar(year, month);
+    calendarDiv[0].appendChild(cal);
+  };
+  const parseDate = (date) => {
+    const dateRegExp = /^(0[1-9]|[1-2][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+  };
+  //-----------------------------------------------------
   const nomPrenomInput = $('#nom #inp-nom');
   const selectNomPrenom = (nomPrenom) => {
     data.nomPrenom = nomPrenom;
