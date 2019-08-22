@@ -10,20 +10,76 @@
 </head>
 
 <body>
-    <div id="genre">
+    <div id="header">
         <h1 class="center">إمتحان البكالوريا رياضة</h1>
+    </div>
 
+    <div id="genre" class="page border">
+        <h2 class="center">أنت؟</h2>
         <div class="genre">
             <label class="toggle genre-garcon">
-                <input type="radio" name="genre" id="genre" value="garcon">
-                <span>♂ ولد</span>
+                <input type="radio" name="genre" id="genre" value="genre-garcon">
+                <span>♂ تلميذ</span>
             </label>
 
             <label class="toggle genre-fille">
-                <input type="radio" name="genre" id="genre" value="fille">
-                <span>♀ بنت</span>
+                <input type="radio" name="genre" id="genre" value="genre-fille">
+                <span>♀ تلميذة</span>
             </label>
         </div>
+    </div>
+
+    <div id="sections" class="page border">
+        <h2 class="center">شعبتك؟</h2>
+
+        <div class="sections">
+            <button>آداب</button>
+            <button>إق. وتصرّف</button>
+            <button>رياضيات</button>
+            <button>علوم تقنية</button>
+            <button>علوم تجريبية</button>
+            <button>علوم إعلامية</button>
+        </div>
+    </div>
+
+    <div id="classe" class="page border">
+        <h2 class="center">قسمك؟</h2>
+
+        <h3 class="center">رابعة آداب</h3>
+
+        <div class="classes"></div>
+    </div>
+
+    <div id="nom" class="page border">
+        <label for="inp-nom">
+            <h2 class="center">إسمك؟</h2>
+        </label>
+
+        <div>
+            <input type="text" name="nom" id="inp-nom">
+        </div>
+    </div>
+
+    <div id="lycee" class="page border">
+        <label for="inp-lycee">
+            <h2 class="center">معهدك؟</h2>
+        </label>
+
+        <div>
+            <input type="text" name="lycee" id="inp-lycee">
+        </div>
+    </div>
+
+    <div id="date-epreuve" class="page border">
+        <label for="inp-date-epreuve">
+            <h2 class="center">التاريخ؟</h2>
+        </label>
+
+        <div>
+            <input type="text" name="lycee" id="inp-date-epreuve">
+        </div>
+
+        <div class="calendrier"></div>
     </div>
 
     <div id="page-imprimee">
@@ -173,6 +229,9 @@
             <div>إمضاء المدرّس(ة)</div>
         </div>
     </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

@@ -158,14 +158,12 @@ input:focus {
     margin: 0.1em 0;
 }
 
-span[data-famille],
-span[data-difficulte] {
+span[data-famille], span[data-difficulte] {
     display: inline-block;
     width: 3.5cm;
 }
 
-tr[data-familles] td,
-tr[data-difficultes] td {
+tr[data-familles] td, tr[data-difficultes] td {
     text-align: center;
 }
 
@@ -173,36 +171,31 @@ tr[data-difficultes] td {
     position: relative;
 }
 
-#genre {
-
+#header h1 {
+    font-size: 2em;
 }
 
-#genre h1 {
-    font-size: 5em;
+#genre h2, #sections h2, #classe h2, #nom h2, #lycee h2, #date-epreuve h2 {
+    font-size: 3em;
 }
 
 #genre .genre {
     display: flex;
     flex-wrap: wrap;
-    margin-right: auto;
-    margin-left: auto;
 }
 
-#genre .genre label {
+#genre .toggle {
     display: block;
-    width: calc(50% - 2em);
-    margin: 2em 1em;
+    position: relative;
+    width: calc(100% - 0.5em);
+    margin: 0.2em;
     text-align: center;
     font-size: 2.5em;
-    height: 4em;
+    height: 2em;
 }
 
 #genre .genre input[type=radio] {
     display: none;
-}
-
-#genre .toggle {
-    position: relative;
 }
 
 #genre .toggle span {
@@ -210,30 +203,86 @@ tr[data-difficultes] td {
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     border-radius: 15px;
     background-color: #999;
     color: #fff;
-    line-height: 2.5em;
     cursor: pointer;
+    line-height: 2em;
 }
 
-#genre .toggle.genre-garcon input[type=radio]:checked + span  {
+#genre .toggle.genre-garcon input[type=radio]:checked+span {
     background-color: #3F51B5;
 }
 
-#genre .toggle.genre-fille input[type=radio]:checked + span  {
+#genre .toggle.genre-fille input[type=radio]:checked+span {
     background-color: #e91e63;
+}
+
+#sections .sections {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#sections .sections button {
+    display: inline-block;
+    width: calc(100% - 0.5em);
+    margin: 0.20em;
+    font-size: 1.1em;
+    background-color: #333;
+    color: #fff;
+    min-height: 2em;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+}
+
+#sections .sections button.active {
+    background-color: #ff5722;
+}
+
+#classe .classes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#classe .classes button {
+    display: inline-block;
+    width: calc(20% - 0.3em);
+    margin: 0.1em;
+    font-size: 1.1em;
+    background-color: #333;
+    color: #fff;
+    min-height: 2em;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+}
+
+#classe .classes button.active {
+    background-color: #009688;
+}
+
+#inp-lycee, #inp-nom, #inp-date-epreuve {
+    text-align: center;
+    display: block;
+    margin: 1em 0.2em;
+    padding: 0.2em;
+    font-size: 2em;
+    width: calc(100% - 0.9em);
+}
+
+#familles {
+    display: none;
 }
 
 @media print {
     input[type=text] {
-        border:0;
+        border: 0;
     }
-
     tr[data-familles] button, tr[data-difficultes] button {
         display: none;
     }
-
     #genre {
         display: none;
     }
