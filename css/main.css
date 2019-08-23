@@ -192,30 +192,18 @@ tr[data-familles] td, tr[data-difficultes] td {
     text-align: center;
     font-size: 2.5em;
     height: 2em;
-}
-
-#genre .genre input[type=radio] {
-    display: none;
-}
-
-#genre .toggle span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 15px;
-    background-color: #999;
+    background-color: #333;
     color: #fff;
+    border-radius: 15px;
+    border: 0;
     cursor: pointer;
-    line-height: 2em;
 }
 
-#genre .toggle.genre-garcon input[type=radio]:checked+span {
+#genre .toggle.genre-garcon.active {
     background-color: #3F51B5;
 }
 
-#genre .toggle.genre-fille input[type=radio]:checked+span {
+#genre .toggle.genre-fille.active {
     background-color: #e91e63;
 }
 
@@ -292,8 +280,8 @@ tr[data-familles] td, tr[data-difficultes] td {
     background-color: #009688;
 }
 
-#familles {
-    display: none;
+#page-imprimee {
+    width: 28cm;
 }
 
 @media print {

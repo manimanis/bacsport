@@ -5,19 +5,24 @@ function app() {
     allPages.hide();
   };
   const showPage = (page, visible = true) => {
+    const currPage = allPages.eq(+page);
     if (visible) {
-      allPages.eq(+page).show();
+      currPage.show();
+      console.log(currPage.find('[data-main-focus]'));
+      currPage.find('[data-main-focus]').focus();
     } else {
-      allPages.eq(+page).hide();
+      currPage.hide();
     }
   };
   //----------------------------------------------------
-  const genres = $('#genre .toggle :radio');
+  const genres = $('#genre .toggle');
   const selectGenre = (genre) => {
     data.genre = genre;
-    genres.prop('checked', false);
+    genres.removeClass('active');
+    $('#genre .toggle').removeAttr('data-main-focus');
     if (['genre-garcon', 'genre-fille'].includes(genre)) {
-      $('#genre .toggle.' + genre + ' :radio').prop('checked', true);
+      $('#genre .toggle.' + genre).attr('data-main-focus', '');
+      $('#genre .toggle.' + genre).addClass('active');
     }
   };
   //-----------------------------------------------------
@@ -28,7 +33,9 @@ function app() {
       const elem = $(this);
       if (elem.text() === section) {
         elem.addClass('active');
+        elem.attr('data-main-focus', '');
       } else {
+        elem.removeAttr('data-main-focus');
         if (elem.hasClass('active')) {
           elem.removeClass('active');
         }
@@ -57,7 +64,9 @@ function app() {
       const elem = $(this);
       if (elem.val() === classe) {
         elem.addClass('active');
+        elem.attr('data-main-focus', '');
       } else {
+        elem.removeAttr('data-main-focus');
         if (elem.hasClass('active')) {
           elem.removeClass('active');
         }
@@ -183,6 +192,7 @@ function app() {
     calendarDiv.find('tbody button')
       .click((e) => {
         selectDateEpreuve(e.target.value);
+        dateEpreuveInput.focus();
       });
     calendarDiv.find('tbody button').each(function () {
       const elem = $(this);
@@ -296,9 +306,9 @@ function app() {
   });
   //-----------------------------------------------------
   hideAllPages();
-  showPage(0);
 
   selectGenre(data.genre);
+  showPage(0);
 }
 
 $(() => {
