@@ -319,7 +319,11 @@ tr[data-familles] td, tr[data-difficultes] td {
 }
 
 #page-imprimee {
-    width: 28cm;
+    width: 27cm;
+}
+
+#page-imprimee [data-images] td:not(:first-child) {
+    vertical-align: top;
 }
 
 @media print {
