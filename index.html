@@ -12,18 +12,24 @@
 <body>
     <div id="header">
         <h1 class="center">إمتحان البكالوريا رياضة</h1>
+
+        <div id="page-position">
+            <button></button>
+            <span></span>
+            <button></button>
+        </div>
     </div>
 
-    <div id="genre" class="page border">
-        <h2 class="center">أنا</h2>
+    <div id="genre" class="page border rounded">
+        <h2 class="page-title center">أنا</h2>
         <div class="genre">
             <button class="toggle genre-garcon" value="genre-garcon">♂ تلميذ</button>
             <button class="toggle genre-fille" value="genre-fille">♀ تلميذة</button>
         </div>
     </div>
 
-    <div id="sections" class="page border">
-        <h2 class="center">شعبتي</h2>
+    <div id="sections" class="page border rounded">
+        <h2 class="page-title center">شعبتي</h2>
 
         <div class="sections">
             <button>آداب</button>
@@ -35,17 +41,17 @@
         </div>
     </div>
 
-    <div id="classe" class="page border">
-        <h2 class="center">قسمي</h2>
+    <div id="classe" class="page border rounded">
+        <h2 class="page-title center">قسمي</h2>
 
         <h3 class="center">رابعة آداب</h3>
 
         <div class="classes"></div>
     </div>
 
-    <div id="nom" class="page border">
+    <div id="nom" class="page border rounded">
         <label for="inp-nom">
-            <h2 class="center">إسمي</h2>
+            <h2 class="page-title center">إسمي</h2>
         </label>
 
         <div>
@@ -53,9 +59,9 @@
         </div>
     </div>
 
-    <div id="lycee" class="page border">
+    <div id="lycee" class="page border rounded">
         <label for="inp-lycee">
-            <h2 class="center">معهدي</h2>
+            <h2 class="page-title center">معهدي</h2>
         </label>
 
         <div>
@@ -63,9 +69,9 @@
         </div>
     </div>
 
-    <div id="date-epreuve" class="page border">
+    <div id="date-epreuve" class="page border rounded">
         <label for="inp-date-epreuve">
-            <h2 class="center">التاريخ؟</h2>
+            <h2 class="page-title center">تاريخ الإمتحان</h2>
         </label>
 
         <div>
@@ -76,6 +82,8 @@
     </div>
 
     <div id="page-imprimee" class="page">
+        <span class="page-title">الأخيرة</span>
+
         <div class="head-titles">
             <h1 class="center border">إمتحان البكالوريا - دورة جوان <span data-annee>2019</span></h1>
 
@@ -93,20 +101,20 @@
 
         <div class="coords row">
             <div class="nom-prenom">
-                <div><label for="nomprenom">الإسم واللقب:</label></div>
-                <div><input type="text" name="nomprenom" id="nomprenom" class="form-control"></div>
+                <strong>الإسم واللقب:</strong>
+                <span data-nom-prenom></span>
             </div>
             <div class="lycee">
-                <div><label for="lycee">المعهد:</label></div>
-                <div><input type="text" name="lycee" id="lycee" class="form-control"></div>
+                <strong>المعهد:</strong>
+                <span data-lycee></span>
             </div>
             <div class="classe">
-                <div><label for="classe">القسم:</label></div>
-                <div><input type="text" name="classe" id="classe" class="form-control"></div>
+                <strong>القسم:</strong>
+                <span data-classe></span>
             </div>
             <div class="date">
-                <div><label for="classe">التاريخ:</label></div>
-                <div><input type="text" name="classe" id="classe" class="form-control"></div>
+                <strong>التاريخ:</strong>
+                <span data-date-epreuve></span>
             </div>
         </div>
 
@@ -125,60 +133,20 @@
             <tbody>
                 <tr data-familles>
                     <td colspan="2" class="center">المجموعات<br>(familles)</td>
-                    <td>
-                        <button class="next-famille">&lt;</button>
-                        <span data-famille></span>
-                        <button class="prev-famille">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-famille">&lt;</button>
-                        <span data-famille></span>
-                        <button class="prev-famille">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-famille">&lt;</button>
-                        <span data-famille></span>
-                        <button class="prev-famille">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-famille">&lt;</button>
-                        <span data-famille></span>
-                        <button class="prev-famille">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-famille">&lt;</button>
-                        <span data-famille></span>
-                        <button class="prev-famille">&gt;</button>
-                    </td>
+                    <td><span data-famille></span></td>
+                    <td><span data-famille></span></td>
+                    <td><span data-famille></span></td>
+                    <td><span data-famille></span></td>
+                    <td><span data-famille></span></td>
                 </tr>
                 <tr data-difficultes>
                     <td rowspan="2" class="center rotate">الصعوبات<br>(Difficultés)</td>
                     <td class="center rotate">الصعوبة</td>
-                    <td>
-                        <button class="next-difficulte">&lt;</button>
-                        <span data-difficulte></span>
-                        <button class="prev-difficulte">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-difficulte">&lt;</button>
-                        <span data-difficulte></span>
-                        <button class="prev-difficulte">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-difficulte">&lt;</button>
-                        <span data-difficulte></span>
-                        <button class="prev-difficulte">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-difficulte">&lt;</button>
-                        <span data-difficulte></span>
-                        <button class="prev-difficulte">&gt;</button>
-                    </td>
-                    <td>
-                        <button class="next-difficulte">&lt;</button>
-                        <span data-difficulte></span>
-                        <button class="prev-difficulte">&gt;</button>
-                    </td>
+                    <td><span data-difficulte></span></td>
+                    <td><span data-difficulte></span></td>
+                    <td><span data-difficulte></span></td>
+                    <td><span data-difficulte></span></td>
+                    <td><span data-difficulte></span></td>
                 </tr>
                 <tr data-images>
                     <td class="center rotate">الصورة</td>
@@ -218,7 +186,7 @@
         </table>
 
         <div id="signatures">
-            <div>إمضاء المترشح(ة)</div>
+            <div data-signature>إمضاء المترشح(ة)</div>
             <div>إمضاء المدرّس(ة)</div>
         </div>
     </div>

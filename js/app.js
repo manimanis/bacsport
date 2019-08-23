@@ -1,14 +1,34 @@
 function app() {
   const allPages = $('.page');
+  const pagePosition = $('#page-position');
+  const prevPageBtn = pagePosition.find('button:first-child');
+  const nextPageBtn = pagePosition.find('button:last-child');
+  const currPageSpan = pagePosition.find('span');
 
   const hideAllPages = () => {
     allPages.hide();
   };
   const showPage = (page, visible = true) => {
     const currPage = allPages.eq(+page);
+    prevPageBtn
+      .prop('disabled', +page === 0)
+      .text((page > 0) ? allPages.eq(+page - 1).find('.page-title').text() : '-')
+      .unbind('click')
+      .click(() => {
+        displayPage(+page - 1);
+      });
+
+    nextPageBtn
+      .prop('disabled', (+page + 1) >= allPages.length)
+      .text((page + 1 < allPages.length) ? allPages.eq(+page + 1).find('.page-title').text() : '-')
+      .unbind('click')
+      .click(() => {
+        displayPage(+page + 1);
+      });
+
+    currPageSpan.text((page + 1) + '/' + allPages.length);
     if (visible) {
       currPage.show();
-      console.log(currPage.find('[data-main-focus]'));
       currPage.find('[data-main-focus]').focus();
     } else {
       currPage.hide();
@@ -73,10 +93,7 @@ function app() {
       }
       elem.click((e) => {
         selectClasse($(e.target).val());
-        selectNomPrenom(data.nomPrenom);
-
-        showPage(2, false);
-        showPage(3);
+        displayPage(3);
       });
     });
   };
@@ -257,58 +274,105 @@ function app() {
     lyceeInput.val(lycee);
   };
   //-----------------------------------------------------
-  const data = {
+  let data = JSON.parse(window.localStorage.getItem('eleve')) || {
     genre: 'genre-garcon',
-    section: 'علوم تقنية',
-    classe: 'رابعة علوم تقنية 3',
-    nomPrenom: 'محمد أنيس ماني',
-    lycee: 'معهد حمام سوسة',
+    section: 'آداب',
+    classe: 'رابعة آداب 1',
+    nomPrenom: 'سهيل التونسي',
+    lycee: 'معهد التفوق',
     dateEpreuve: '01/04/2019'
   };
   //-----------------------------------------------------
+  const fillTable = (data) => {
+    window.localStorage.setItem('eleve', JSON.stringify(data));
+    const pageImprimee = $('#page-imprimee');
+    pageImprimee.find('span[data-nom-prenom]').text(data.nomPrenom);
+    pageImprimee.find('span[data-lycee]').text(data.lycee);
+    pageImprimee.find('span[data-classe]').text(data.classe);
+    pageImprimee.find('span[data-date-epreuve]').text(data.dateEpreuve);
+    pageImprimee.find('div[data-signature]').text('إمضاء المترشح' + ((data.genre === 'genre-fille') ? 'ة' : ''))
+  };
+  //-----------------------------------------------------
+  const pageManager = () => {
+    let currPage = 0;
+    const saveData = (numPage) => {
+      switch (numPage) {
+        case 3:
+          selectNomPrenom(nomPrenomInput.val());
+          break;
+        case 4:
+          selectLycee(lyceeInput.val());
+          break;
+        case 5:
+          selectDateEpreuve(dateEpreuveInput.val());
+          break;
+      }
+    };
+    const loadData = numPage => {
+      switch (numPage) {
+        case 0:
+          selectGenre(data.genre);
+          break;
+        case 1:
+          selectSection(data.section);
+          break;
+        case 2:
+          selectClasse(data.classe);
+          break;
+        case 3:
+          selectNomPrenom(data.nomPrenom);
+          break;
+        case 4:
+          selectLycee(data.lycee);
+          break;
+        case 5:
+          selectDateEpreuve(data.dateEpreuve);
+          break;
+        case 6:
+          fillTable(data);
+          break;
+      }
+    };
+    return (numPage) => {
+      numPage = +numPage;
+
+      saveData(currPage);
+      loadData(numPage);
+
+      showPage(currPage, false);
+      showPage(numPage);
+      currPage = numPage;
+    };
+  };
+  const displayPage = pageManager();
+  //-----------------------------------------------------
   genres.click((e) => {
     selectGenre(e.target.value);
-    selectSection(data.section);
-
-    showPage(0, false);
-    showPage(1);
+    displayPage(1);
   });
   sections.click((e) => {
     selectSection($(e.target).text());
-    selectClasse(data.classe);
-
-    showPage(1, false);
-    showPage(2);
+    displayPage(2);
   });
   nomPrenomInput.keydown((e) => {
     if (e.which === 13) {
-      selectNomPrenom(nomPrenomInput.val());
-      selectLycee(data.lycee);
+      displayPage(4);
     }
-    showPage(3, false);
-    showPage(4);
   });
   lyceeInput.keydown((e) => {
     if (e.which === 13) {
-      selectLycee(lyceeInput.val());
-      selectDateEpreuve(data.dateEpreuve);
+      displayPage(5);
     }
-    showPage(4, false);
-    showPage(5);
   });
   dateEpreuveInput.keydown((e) => {
     if (e.which === 13) {
-      selectDateEpreuve(dateEpreuveInput.val());
-      selectDateEpreuve(data.dateEpreuve);
+      displayPage(6);
     }
-    showPage(5, false);
-    showPage(6);
   });
   //-----------------------------------------------------
   hideAllPages();
 
-  selectGenre(data.genre);
-  showPage(0);
+  displayPage(0);
 }
 
 $(() => {

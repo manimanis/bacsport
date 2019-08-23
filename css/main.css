@@ -30,6 +30,10 @@ h1, h2, h3, h4 {
     border: 1pt solid #000;
 }
 
+.rounded {
+    border-radius: 0.3em;
+}
+
 .center {
     text-align: center;
 }
@@ -165,6 +169,40 @@ span[data-famille], span[data-difficulte] {
 
 tr[data-familles] td, tr[data-difficultes] td {
     text-align: center;
+}
+
+#page-position {
+    position: relative;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0.2em 0;
+}
+
+#page-position button {
+    position: absolute;
+    min-width: 7em;
+    height: 3em;
+    top: 0;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    padding: 0 0.2em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#page-position button:disabled {
+    background-color: #ddd;
+    color: #333;
+}
+
+#page-position button:first-child {
+    right: 0;
+}
+
+#page-position button:last-child {
+    left: 0;
 }
 
 #page-imprimee {
