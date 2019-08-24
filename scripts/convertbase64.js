@@ -1,3 +1,4 @@
+/* used to convert gif files to base64 */
 const path = require('path');
 const fs = require('fs');
 
@@ -14,7 +15,7 @@ function base64_encode(file) {
 
 var stream = fs.createWriteStream(cssPath);
 
-stream.write('.cycle { background-size: contain; height: 3cm; background-repeat: no-repeat; background-position-x: center; background-position-y: top; }\n');
+stream.write('.cycle { background-size: contain; background-repeat: no-repeat; background-position-x: center; background-position-y: top; }\n');
 
 fs.readdir(directoryPath, function (err, files) {
     //handling error
