@@ -1,4 +1,4 @@
-pngquant
-node_modules
-imgs-cycle
-scripts
+pngquant/*
+node_modules/*
+imgs-cycle/*
+script/*
