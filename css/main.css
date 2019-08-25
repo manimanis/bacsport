@@ -326,6 +326,49 @@ tr[data-familles] td, tr[data-difficultes] td {
     vertical-align: top;
 }
 
+.page {
+    min-height: calc(100vh - 7em);
+}
+
+.choix-cycle .choix-famille, .choix-cycle .choix-difficulte {
+    display: flex;
+    border-radius: 10px;
+}
+
+.choix-cycle .choix-famille button, .choix-cycle .choix-difficulte button {
+    display: block;
+    flex-grow: 1;
+    height: 2em;
+    border: 0;
+    background-color: #666;
+    color: #fff;
+}
+
+.choix-cycle .choix-famille button.active {
+    background-color: #cddc39;
+}
+
+.choix-cycle .choix-difficulte button.active {
+    background-color: #8bc34a;
+}
+
+.choix-cycle .choix {
+    position: relative;
+    min-height: 7cm;
+}
+
+.choix-cycle .description {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.choix-cycle .image {
+    min-height: 7cm;
+}
+
 @media print {
     input[type=text] {
         border: 0;

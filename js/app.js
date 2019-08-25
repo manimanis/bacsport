@@ -6,118 +6,87 @@ function app() {
   const currPageSpan = pagePosition.find('span');
 
   const tiles = {
-    'genre-garcon': {
-      f1: {
-        a1: { x: '0px', y: '-3600px', description: '' },
-        a2: { x: '0px', y: '0px', description: 'Chandelle (2sec) bras tendus en appui au sol suivie d\'une planche faciale jambes écartées.' },
-        a3: { x: '0px', y: '-600px', description: 'Planche faciale sur 1 pied (2sec).' },
-        b1: { x: '0px', y: '-1200px', description: 'Appui Tendu Renversé (ATR) passager.' },
-        b2: { x: '0px', y: '-3600px', description: '' },
-        b3: { x: '0px', y: '-1800px', description: 'Grand écart antéro-postérieur ou écrasement facial jambes écartées ou serrées.' },
-        c1: { x: '0px', y: '-2400px', description: 'Appui Tendu Renversé (2sec).' },
-        c2: { x: '0px', y: '-3600px', description: '' },
-        c3: { x: '0px', y: '-3000px', description: 'Appui tendu renversé en force (2sec). Départ, jambes écartées.' }
+    "genre-garcon": {
+      "f1": {
+        "a2": "Chandelle (2sec) bras tendus en appui au sol suivie d'une planche faciale jambes écartées.",
+        "a3": "Planche faciale sur 1 pied (2sec).",
+        "b1": "Appui Tendu Renversé (ATR) passager.",
+        "b3": "Grand écart antéro-postérieur ou écrasement facial jambes écartées ou serrées.",
+        "c1": "Appui Tendu Renversé (2sec).",
+        "c3": "Appui tendu renversé en force (2sec). Départ, jambes écartées."
       },
-      f2: {
-        a1: { x: '0px', y: '-3600px', description: '' },
-        a2: { x: '-600px', y: '0px', description: 'Appel de 2 pieds saut à la verticale, avec un demi tour.' },
-        a3: { x: '-600px', y: '-600px', description: 'Passage de l\'appui facial à l\'appui dorsal.' },
-        b1: { x: '-600px', y: '-1200px', description: 'Lancer de la jambe arrière en avant, 1/2 pivot sur 1/2 poite 1 pas en avant en rassemblant les deux pieds.' },
-        b2: { x: '-600px', y: '-1800px', description: 'Appel de 2 pieds saut à la verticale avec 1 tour (360°).' },
-        b3: { x: '-600px', y: '-2400px', description: 'De la position accroupie 2 cercles d\'une jambe tendue.' },
-        c1: { x: '-600px', y: '-3000px', description: 'Appel de 2 pieds saut carpé jambes serrées ou écartées à l\'horizontale.' },
-        c2: { x: '-600px', y: '-3600px', description: 'Appel de 2 pieds saut à la verticale 1 tour et demi (540°).' },
-        c3: { x: '-600px', y: '-4200px', description: 'De la position accroupie 2 cercles d\'une jambe tendue avec 1/4 ou 1/2 tour à chaque cercle.' }
+      "f2": {
+        "a2": "Appel de 2 pieds saut à la verticale, avec un demi tour.",
+        "a3": "Passage de l'appui facial à l'appui dorsal.",
+        "b1": "Lancer de la jambe arrière en avant, 1/2 pivot sur 1/2 poite 1 pas en avant en rassemblant les deux pieds.",
+        "b2": "Appel de 2 pieds saut à la verticale avec 1 tour (360°).", "b3": "De la position accroupie 2 cercles d'une jambe tendue.",
+        "c1": "Appel de 2 pieds saut carpé jambes serrées ou écartées à l'horizontale.",
+        "c2": "Appel de 2 pieds saut à la verticale 1 tour et demi (540°).",
+        "c3": "De la position accroupie 2 cercles d'une jambe tendue avec 1/4 ou 1/2 tour à chaque cercle."
       },
-      f3: {
-        a1: { x: '0px', y: '-3600px', description: '' },
-        a2: { x: '0px', y: '-3600px', description: '' },
-        a3: { x: '0px', y: '-3600px', description: '' },
-        b1: { x: '-1200px', y: '0px', description: 'Roulade avec jambes écartées.' },
-        b2: { x: '0px', y: '-3600px', description: '' },
-        b3: { x: '0px', y: '-3600px', description: '' },
-        c1: { x: '-1200px', y: '-600px', description: 'Roulade avec jambes tendues et serrées.' },
-        c2: { x: '-1200px', y: '-1200px', description: 'Roulade avec plongée.' },
-        c3: { x: '0px', y: '-3600px', description: '' },
+      "f3": {
+        "b1": "Roulade avec jambes écartées.",
+        "c1": "Roulade avec jambes tendues et serrées.",
+        "c2": "Roulade avec plongée."
       },
-      f4: {
-        a1: { x: '0px', y: '-3600px', description: '' },
-        a2: { x: '-1800px', y: '0px', description: 'Roulade arrière planche faciale horizontale jambes écartées.' },
-        a3: { x: '0px', y: '-3600px', description: '' },
-        b1: { x: '0px', y: '-3600px', description: '' },
-        b2: { x: '-1800px', y: '-600px', description: 'Du siège temps de flexion ... sur les jambes tendues roulade arrière groupée.' },
-        b3: { x: '-1800px', y: '-1200px', description: 'Roulade arrière jambes tendues avec poussée des bras.' },
-        c1: { x: '-1800px', y: '-1800px', description: 'Roulade arrière l\'appui tendu renversé passager.' },
-        c2: { x: '0px', y: '-3600px', description: '' },
-        c3: { x: '0px', y: '-3600px', description: '' }
+      "f4": {
+        "a2": "Roulade arrière planche faciale horizontale jambes écartées.",
+        "b2": "Du siège temps de flexion ... sur les jambes tendues roulade arrière groupée.",
+        "b3": "Roulade arrière jambes tendues avec poussée des bras.",
+        "c1": "Roulade arrière l'appui tendu renversé passager."
       },
-      f5: {
-        a1: { x: '-2400px', y: '0px', description: 'Roulade arrière planche faciale horizontale jambes écartées.' },
-        a2: { x: '0px', y: '-3600px', description: '' },
-        a3: { x: '0px', y: '-3600px', description: '' },
-        b1: { x: '-2400px', y: '-600px', description: 'Renversement latéral d\'une main.' },
-        b2: { x: '0px', y: '-3600px', description: '' },
-        b3: { x: '0px', y: '-3600px', description: '' },
-        c1: { x: '-2400px', y: '-1200px', description: 'Rondade saut à la verticale.' },
-        c2: { x: '-2400px', y: '-1800px', description: 'Renversement avant réception sur 1 ou 2 jambes (saut de main).' },
-        c3: { x: '0px', y: '-3600px', description: '' },
+      "f5": {
+        "a1": "Roulade arrière planche faciale horizontale jambes écartées.",
+        "b1": "Renversement latéral d'une main.",
+        "c1": "Rondade saut à la verticale.",
+        "c2": "Renversement avant réception sur 1 ou 2 jambes (saut de main)."
       }
     },
-    'genre-fille': {
-      f1: {
-        a1: { x: '0px', y: '0px', description: "Planche faciale et directe,tour enveloppé sue 2 pieds sur 1/2 pointe." },
-        a2: { x: '0px', y: '-4200px', description: "" },
-        a3: { x: '0px', y: '-600px', description: "1/2 tour sur 1 pied, position jambe libre indifférente : arrivée jambre libre maintenue." },
-        b1: { x: '0px', y: '-1200px', description: "Tour enveloppé sur 2 pieds, sur 1/2 pointe et directement 1/2 tour sur 1 pied." },
-        b2: { x: '0px', y: '-1800px', description: "1/2 tour arabesque." },
-        b3: { x: '0px', y: '-2400px', description: "Planche et 1/2 tour : pied position jambre libre indifférente : arrivée jambe libre maintenue." },
-        c1: { x: '0px', y: '-4200px', description: "" },
-        c2: { x: '0px', y: '-3000px', description: "1 tour arabesque." },
-        c3: { x: '0px', y: '-3600px', description: "Un tour sur 1 pied, position jambre libre indifférente : arrivée jambe libre maintenue." }
+    "genre-fille": {
+      "f1":
+      {
+        "a1": "Planche faciale et directe,tour enveloppé sue 2 pieds sur 1/2 pointe.",
+        "a3": "1/2 tour sur 1 pied, position jambe libre indifférente : arrivée jambre libre maintenue.",
+        "b1": "Tour enveloppé sur 2 pieds, sur 1/2 pointe et directement 1/2 tour sur 1 pied.",
+        "b2": "1/2 tour arabesque.",
+        "b3": "Planche et 1/2 tour : pied position jambre libre indifférente : arrivée jambe libre maintenue.",
+        "c2": "1 tour arabesque.",
+        "c3": "Un tour sur 1 pied, position jambre libre indifférente : arrivée jambe libre maintenue."
       },
-      f2: {
-        a1: { x: '-600px', y: '0px', description: "Un pas assemblé - sissone." },
-        a2: { x: '-600px', y: '-600px', description: "Saut de chat." },
-        a3: { x: '-600px', y: '-1200px', description: "Appel 2 pieds saut vertical et 1/2 tour à 'air." },
-        b1: { x: '-600px', y: '-1800px', description: "Un pas assemblé, saut de biche." },
-        b2: { x: '-600px', y: '-2400px', description: "Saut de chat avec 1/2 tour." },
-        b3: { x: '-600px', y: '-3000px', description: "Appel 2 pieds au vertical et 1 tour complet." },
-        c1: { x: '-600px', y: '-3600px', description: "Grand jeté avant, jambe tendue ou fléchie/tendue avant." },
-        c2: { x: '0px', y: '-4200px', description: "" },
-        c3: { x: '0px', y: '-4200px', description: "" }
+      "f2": {
+        "a1": "Un pas assemblé - sissone.",
+        "a2": "Saut de chat.",
+        "a3": "Appel 2 pieds saut vertical et 1/2 tour à 'air.",
+        "b1": "Un pas assemblé, saut de biche.",
+        "b2": "Saut de chat avec 1/2 tour.",
+        "b3": "Appel 2 pieds au vertical et 1 tour complet.",
+        "c1": "Grand jeté avant, jambe tendue ou fléchie/tendue avant."
       },
-      f3: {
-        a1: { x: '0px', y: '-4200px', description: "" },
-        a2: { x: '-1200px', y: '0px', description: "ATR (Appui Tendu Renversé) ciceau. Revenir à la verticale." },
-        a3: { x: '0px', y: '-4200px', description: "" },
-        b1: { x: '0px', y: '-4200px', description: "" },
-        b2: { x: '-1200px', y: '-600px', description: "Départ fente, bras dans prolongement du corps, roue." },
-        b3: { x: '-1200px', y: '-1200px', description: "ATR descente en pont." },
-        c1: { x: '-1200px', y: '-1800px', description: "Rondade, saut vertical." },
-        c2: { x: '-1200px', y: '-2400px', description: "Souplesse arrière ou avant" },
-        c3: { x: '-1200px', y: '-3000px', description: "ATR (appui tendu renversé) tenu puis descente en pont, remonté à la station debout." },
+      "f3": {
+        "a2": "ATR (Appui Tendu Renversé) ciceau. Revenir à la verticale.",
+        "b2": "Départ fente, bras dans prolongement du corps, roue.",
+        "b3": "ATR descente en pont.",
+        "c1": "Rondade, saut vertical.",
+        "c2": "Souplesse arrière ou avant",
+        "c3": "ATR (appui tendu renversé) tenu puis descente en pont, remonté à la station debout."
       },
-      f4: {
-        a1: { x: '-1800px', y: '0px', description: "Roulade arrière jambes écartées." },
-        a2: { x: '0px', y: '-4200px', description: "" },
-        a3: { x: '-1800px', y: '-600px', description: "Chandelle + poisson." },
-        b1: { x: '0px', y: '-4200px', description: "" },
-        b2: { x: '-1800px', y: '-1200px', description: "De la station droite sur 1/2 pointes, roulade arrière avec poussée des bras avant de revenir jambes tendues." },
-        b3: { x: '-1800px', y: '-1800px', description: "Roulade avant, jambes écartées." },
-        c1: { x: '-1800px', y: '-2400px', description: "Roulade avant plongée + saut vertical." },
-        c2: { x: '-1800px', y: '-3000px', description: "ATR (appui tendu renversé) puis roulade." },
-        c3: { x: '-1800px', y: '-3600px', description: "Roulade avant, jambes tendues et réunies." }
+      "f4": {
+        "a1": "Roulade arrière jambes écartées.",
+        "a3": "Chandelle + poisson.",
+        "b2": "De la station droite sur 1/2 pointes, roulade arrière avec poussée des bras avant de revenir jambes tendues.",
+        "b3": "Roulade avant, jambes écartées.",
+        "c1": "Roulade avant plongée + saut vertical.",
+        "c2": "ATR (appui tendu renversé) puis roulade.",
+        "c3": "Roulade avant, jambes tendues et réunies."
       },
-      f5: {
-        a1: { x: '-2400px', y: '0px', description: "Planche facial, jambe d'appui tendue, tenue 2 secondes." },
-        a2: { x: '0px', y: '-4200px', description: "" },
-        a3: { x: '-2400px', y: '-600px', description: "Pont de la station allongée jambes fléchies, extension complète des jambes et des bras (jambes serrées et tendues), arrivée libre au sol." },
-        b1: { x: '0px', y: '-4200px', description: "" },
-        b2: { x: '-2400px', y: '-1200px', description: "Ecrasement faciale, jambes écartées ou serrées." },
-        b3: { x: '-2400px', y: '-1800px', description: "Onde avant du haut vers le bas et de l'avant vers l'arrière." },
-        c1: { x: '-2400px', y: '-2400px', description: "Planche facialesur 1/2 pointes, tenue 2 secondes." },
-        c2: { x: '-2400px', y: '-3000px', description: "Grand écart antéro-postérieur." },
-        c3: { x: '-2400px', y: '-3600px', description: "Onde arrière du haut vers le bas et l'arrière vers l'avant." }
+      "f5": {
+        "a1": "Planche facial, jambe d'appui tendue, tenue 2 secondes.",
+        "a3": "Pont de la station allongée jambes fléchies, extension complète des jambes et des bras (jambes serrées et tendues), arrivée libre au sol.",
+        "b2": "Ecrasement faciale, jambes écartées ou serrées.",
+        "b3": "Onde avant du haut vers le bas et de l'avant vers l'arrière.",
+        "c1": "Planche facialesur 1/2 pointes, tenue 2 secondes.",
+        "c2": "Grand écart antéro-postérieur.",
+        "c3": "Onde arrière du haut vers le bas et l'arrière vers l'avant."
       }
     }
   };
@@ -391,14 +360,73 @@ function app() {
     lyceeInput.val(lycee);
   };
   //-----------------------------------------------------
-  let data = JSON.parse(window.localStorage.getItem('eleve')) || {
+  const fillFamilles = (index) => {
+    const familleDiv = $('.choix-cycle:eq(' + index + ') .choix-famille');
+    familleDiv.html('');
+    const selectedFamille = data.cycle[index].split('-')[0];
+    for (const f of Object.keys(tiles[data.genre])) {
+      const btn = $('<button>')
+        .text(f)
+        .appendTo(familleDiv)
+        .val(f)
+        .click((e) => {
+          const famille = e.target.value;
+          const selectedFamille = data.cycle[index].split('-')[0];
+          if (famille !== selectedFamille) {
+            const choix = Object.keys(tiles[data.genre][famille]);
+            selectChoix(index, famille + '-' + choix[0]);
+          }
+        });
+      if (f === selectedFamille) {
+        btn.addClass('active');
+      }
+    }
+    fillDifficultes(index, selectedFamille);
+  };
+  const fillDifficultes = (index, famille) => {
+    const diffDiv = $('.choix-cycle:eq(' + index + ') .choix-difficulte');
+    diffDiv.html('');
+    const selectedDiff = data.cycle[index].split('-')[1];
+    for (const d of Object.keys(tiles[data.genre][famille])) {
+      const btn = $('<button>')
+        .text(d)
+        .val(`${famille}-${d}`)
+        .appendTo(diffDiv)
+        .click((e) => {
+          selectChoix(index, e.target.value);
+        });
+      if (d === selectedDiff) {
+        btn.addClass('active');
+      }
+    }
+  };
+  const selectChoix = (index, choix) => {
+    data.cycle[index] = choix;
+    fillFamilles(index);
+    const [fam, dif] = data.cycle[index].split('-');
+    $('.choix-cycle:eq(' + index + ') .choix .description').text(tiles[data.genre][fam][dif]);
+
+    $('.choix-cycle:eq(' + index + ') .choix .image')
+      .removeAttr('class')
+      .addClass(`image cycle ${data.genre} ${data.cycle[index]}`);
+  };
+  //-----------------------------------------------------
+  const defaultData = {
     genre: 'genre-garcon',
     section: 'آداب',
     classe: 'رابعة آداب 1',
     nomPrenom: 'سهيل التونسي',
     lycee: 'معهد التفوق',
-    dateEpreuve: '01/04/2019'
+    dateEpreuve: '01/04/2019',
+    cycle: []
   };
+  for (const f of Object.keys(tiles[defaultData.genre])) {
+    const keys = Object.keys(tiles[defaultData.genre][f]);
+    const idx = Math.floor(Math.random() * keys.length);
+    defaultData.cycle.push(`${f}-${keys[idx]}`);
+  }
+  console.log(defaultData);
+  let data = JSON.parse(window.localStorage.getItem('eleve')) || defaultData;
   //-----------------------------------------------------
   const fillTable = (data) => {
     window.localStorage.setItem('eleve', JSON.stringify(data));
@@ -446,6 +474,13 @@ function app() {
           selectDateEpreuve(data.dateEpreuve);
           break;
         case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+          selectChoix(numPage - 6, data.cycle[numPage - 6]);
+          break;
+        case 11:
           fillTable(data);
           break;
       }
