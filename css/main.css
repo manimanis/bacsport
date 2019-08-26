@@ -332,16 +332,25 @@ tr[data-familles] td, tr[data-difficultes] td {
 
 .choix-cycle .choix-famille, .choix-cycle .choix-difficulte {
     display: flex;
-    border-radius: 10px;
+    width: 96%;
+    margin: 0.2em auto;
 }
 
 .choix-cycle .choix-famille button, .choix-cycle .choix-difficulte button {
     display: block;
     flex-grow: 1;
-    height: 2em;
+    height: 3em;
     border: 0;
     background-color: #666;
     color: #fff;
+}
+
+.choix-cycle .choix-famille button:first-child, .choix-cycle .choix-difficulte button:first-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.choix-cycle .choix-famille button:last-child, .choix-cycle .choix-difficulte button:last-child {
+    border-radius: 8px 0 0 8px;
 }
 
 .choix-cycle .choix-famille button.active {
@@ -352,12 +361,17 @@ tr[data-familles] td, tr[data-difficultes] td {
     background-color: #8bc34a;
 }
 
-.choix-cycle .choix {
+.choix-cycle .choix, #last-page [data-choix] .choix {
     position: relative;
     min-height: 7cm;
 }
 
-.choix-cycle .description {
+#last-page [data-choix] .choix {
+    border: 1px solid #333;
+    margin: 0.2em 0;
+}
+
+.choix-cycle .description, #last-page [data-choix] .description {
     position: absolute;
     text-align: center;
     top: 0;
@@ -365,8 +379,37 @@ tr[data-familles] td, tr[data-difficultes] td {
     left: 0;
 }
 
-.choix-cycle .image {
+.choix-cycle .image, #last-page [data-choix] .image {
     min-height: 7cm;
+}
+
+#last-page strong {
+    display: inline-block;
+    width: 5em;
+    margin-left: 0.7em;
+    text-align: left;
+}
+
+#last-page [data-choix] {
+    width: 96%;
+    margin: 0.2em auto;
+}
+
+#page-imprimee [data-image].choix {
+    position: relative;
+    width: 5cm;
+}
+
+#page-imprimee [data-image].choix .description {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+#page-imprimee [data-image].choix .image {
+    height: 5cm;
 }
 
 @media print {
@@ -377,6 +420,9 @@ tr[data-familles] td, tr[data-difficultes] td {
         display: none;
     }
     #genre {
+        display: none;
+    }
+    #header, #page-imprimee span.page-title {
         display: none;
     }
 }

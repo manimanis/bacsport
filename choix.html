@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/genre-garcon.css">
+  <link rel="stylesheet" href="css/genre-fille.css">
+  <title>إختبار التربية البدنية</title>
+</head>
+
+<body>
+  <div id="page-imprimee" class="page">
+    <div class="head-titles">
+      <h1 class="center border">إمتحان البكالوريا - دورة جوان <span data-annee>2019</span></h1>
+
+      <h2 class="center border">إختبار آخر السنة في مادة التربية البدنيّة</h2>
+
+      <h2 class="center border">قصاصة الإختيار الفردية للجمباز</h2>
+    </div>
+
+    <div id="entete">
+      <p>الجمهوريّة التّونسيّة</p>
+      <p>وزارة الشّباب والرّياضة</p>
+      <p>الإدارة العامّة للتربية البدنيّة والتّكوين والبحث</p>
+      <p>المندوبيّة الجهويّة للشّباب والرّياضة</p>
+    </div>
+
+    <div class="coords row">
+      <div class="nom-prenom">
+        <strong>الإسم واللقب:</strong>
+        <span data-nom-prenom></span>
+      </div>
+      <div class="lycee">
+        <strong>المعهد:</strong>
+        <span data-lycee></span>
+      </div>
+      <div class="classe">
+        <strong>القسم:</strong>
+        <span data-classe></span>
+      </div>
+      <div class="date">
+        <strong>التاريخ:</strong>
+        <span data-date-epreuve></span>
+      </div>
+    </div>
+
+    <table class="table" id="familles">
+      <thead>
+        <tr>
+          <th colspan="2">العناصر</th>
+          <th>عــ1ـــدد</th>
+          <th>عــ2ـــدد</th>
+          <th>عــ2ـــدد</th>
+          <th>عــ4ـــدد</th>
+          <th>عــ5ـــدد</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr data-familles>
+          <td colspan="2" class="center">المجموعات<br>(familles)</td>
+          <td><span data-famille></span></td>
+          <td><span data-famille></span></td>
+          <td><span data-famille></span></td>
+          <td><span data-famille></span></td>
+          <td><span data-famille></span></td>
+        </tr>
+        <tr data-difficultes>
+          <td rowspan="2" class="center rotate">الصعوبات<br>(Difficultés)</td>
+          <td class="center rotate">الصعوبة</td>
+          <td><span data-difficulte></span></td>
+          <td><span data-difficulte></span></td>
+          <td><span data-difficulte></span></td>
+          <td><span data-difficulte></span></td>
+          <td><span data-difficulte></span></td>
+        </tr>
+        <tr data-images>
+          <td class="center rotate">الصورة</td>
+          <td data-image></td>
+          <td data-image></td>
+          <td data-image></td>
+          <td data-image></td>
+          <td data-image></td>
+        </tr>
+        <tr>
+          <td colspan="2">العدد المسند</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="6">المجموع/15</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="6">عناصر الربط والتّصوّر التّسلسليّ/03</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="6">إيقاع التّسلسل/02</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="6">العدد النهائي/20</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div id="signatures">
+      <div data-signature>إمضاء المترشح(ة)</div>
+      <div>إمضاء المدرّس(ة)</div>
+    </div>
+  </div>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/app-choix.js"></script>
+</body>
+
+</html>
