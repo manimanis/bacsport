@@ -1,8 +1,8 @@
 function app() {
   //-----------------------------------------------------
   const fillTable = (data) => {
-    window.localStorage.setItem('eleve', JSON.stringify(data));
     const pageImprimee = $('#page-imprimee');
+    pageImprimee.addClass(data.genre);
     pageImprimee.find('span[data-nom-prenom]').text(data.nomPrenom);
     pageImprimee.find('span[data-lycee]').text(data.lycee);
     pageImprimee.find('span[data-classe]').text(data.classe);

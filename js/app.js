@@ -37,6 +37,9 @@ function app() {
   //----------------------------------------------------
   const genres = $('#genre .toggle');
   const selectGenre = (genre) => {
+    if (genre !== data.genre) {
+      data = generateDefaults(genre);
+    }
     data.genre = genre;
     genres.removeClass('active');
     $('#genre .toggle').removeAttr('data-main-focus');
@@ -69,7 +72,7 @@ function app() {
     const classesDiv = $('#classe .classes');
     classesDiv.html('');
     $('#classe h3').text(fullSectionName);
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 12; i++) {
       $('<button>')
         .attr('type', 'button')
         .val(fullSectionName + ' ' + (i + 1))
@@ -326,6 +329,8 @@ function app() {
   };
   //-----------------------------------------------------
   const selectInfos = (data) => {
+    window.localStorage.setItem('eleve', JSON.stringify(data));
+
     const lastPageDiv = $('#last-page');
 
     lastPageDiv.find('[data-genre]').text('تلميذ' + (data.genre === 'genre-garcon' ? '' : 'ة'));

@@ -165,10 +165,19 @@ input:focus {
 span[data-famille], span[data-difficulte] {
     display: inline-block;
     width: 3.5cm;
+    font-size: 2em;
 }
 
 tr[data-familles] td, tr[data-difficultes] td {
     text-align: center;
+}
+
+.genre-garcon span[data-famille], .genre-garcon span[data-difficulte] {
+    color: #3F51B5;
+}
+
+.genre-fille span[data-famille], .genre-fille span[data-difficulte] {
+    color: #e91e63;
 }
 
 #page-position {
@@ -403,13 +412,27 @@ tr[data-familles] td, tr[data-difficultes] td {
 #page-imprimee [data-image].choix .description {
     position: absolute;
     text-align: center;
-    top: 0;
-    right: 0;
-    left: 0;
+    top: 3px;
+    right: 3px;
+    left: 3px;
+    font-size: 0.85em;
 }
 
 #page-imprimee [data-image].choix .image {
     height: 5cm;
+}
+
+@media screen and (min-width: 600px) {
+    #genre .toggle {
+        width: calc(50% - 0.5em);
+    }
+    #sections .sections button {
+        width: calc(33.3% - 0.5em);
+        font-size: 2em;
+    }
+    #classe .classes button {
+        width: calc(100% / 6 - 0.2em);
+    }
 }
 
 @media print {

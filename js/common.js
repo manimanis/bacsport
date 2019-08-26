@@ -84,18 +84,24 @@ const tiles = {
   }
 };
 //-----------------------------------------------------
-const defaultData = {
-  genre: 'genre-garcon',
-  section: 'آداب',
-  classe: 'رابعة آداب 1',
-  nomPrenom: 'سهيل التونسي',
-  lycee: 'معهد التفوق',
-  dateEpreuve: '01/04/2019',
-  cycle: []
+const generateDefaults = (genre) => {
+  const res = {
+    genre: genre,
+    section: 'آداب',
+    classe: 'رابعة آداب 1',
+    nomPrenom: (genre === 'genre-garcon') ? 'سهيل التونسي' : 'ياسمين السوسي',
+    lycee: 'معهد التفوق',
+    cycle: []
+  };
+  const now = new Date();
+  res['dateEpreuve'] = ((now.getDate() < 10) ? '0' : '') + now.getDate() + '/' +
+    ((now.getMonth() < 9) ? '0' : '') + (now.getMonth() + 1) + '/' +
+    now.getFullYear();
+  for (const f of Object.keys(tiles[res.genre])) {
+    const keys = Object.keys(tiles[res.genre][f]);
+    const idx = Math.floor(Math.random() * keys.length);
+    res.cycle.push(`${f}-${keys[idx]}`);
+  }
+  return res;
 };
-for (const f of Object.keys(tiles[defaultData.genre])) {
-  const keys = Object.keys(tiles[defaultData.genre][f]);
-  const idx = Math.floor(Math.random() * keys.length);
-  defaultData.cycle.push(`${f}-${keys[idx]}`);
-}
-let data = JSON.parse(window.localStorage.getItem('eleve')) || defaultData;
+let data = JSON.parse(window.localStorage.getItem('eleve')) || generateDefaults('genre-garcon');
