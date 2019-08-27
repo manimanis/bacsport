@@ -180,40 +180,6 @@ tr[data-familles] td, tr[data-difficultes] td {
     color: #e91e63;
 }
 
-#page-position {
-    position: relative;
-    text-align: center;
-    font-size: 1.5em;
-    margin: 0.2em 0;
-}
-
-#page-position button {
-    position: absolute;
-    min-width: 7em;
-    height: 3em;
-    top: 0;
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
-    border: 0;
-    padding: 0 0.2em;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#page-position button:disabled {
-    background-color: #ddd;
-    color: #333;
-}
-
-#page-position button:first-child {
-    right: 0;
-}
-
-#page-position button:last-child {
-    left: 0;
-}
-
 #page-imprimee {
     position: relative;
 }
@@ -336,7 +302,8 @@ tr[data-familles] td, tr[data-difficultes] td {
 }
 
 .page {
-    min-height: calc(100vh - 7em);
+    /* min-height: calc(100vh - 7em); */
+    margin: 0.2em 0;
 }
 
 .choix-cycle .choix-famille, .choix-cycle .choix-difficulte {

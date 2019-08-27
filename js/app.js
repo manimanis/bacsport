@@ -1,38 +1,17 @@
 function app() {
   const allPages = $('.page');
-  const pagePosition = $('#page-position');
-  const prevPageBtn = pagePosition.find('button:first-child');
-  const nextPageBtn = pagePosition.find('button:last-child');
-  const currPageSpan = pagePosition.find('span');
 
   const hideAllPages = () => {
     allPages.hide();
   };
-  const showPage = (page, visible = true) => {
+  const showPage = (page) => {
     const currPage = allPages.eq(+page);
-    prevPageBtn
-      .prop('disabled', +page === 0)
-      .text((page > 0) ? allPages.eq(+page - 1).find('.page-title').text() : '-')
-      .unbind('click')
-      .click(() => {
-        displayPage(+page - 1);
-      });
 
-    nextPageBtn
-      .prop('disabled', (+page + 1) >= allPages.length)
-      .text((page + 1 < allPages.length) ? allPages.eq(+page + 1).find('.page-title').text() : '-')
-      .unbind('click')
-      .click(() => {
-        displayPage(+page + 1);
-      });
-
-    currPageSpan.text((page + 1) + '/' + allPages.length);
-    if (visible) {
-      currPage.show();
-      currPage.find('[data-main-focus]').focus();
-    } else {
-      currPage.hide();
-    }
+    currPage.show();
+    $('html,body').animate({
+      scrollTop: currPage.offset().top
+    }, 'slow');
+    currPage.find('[data-main-focus]').focus();
   };
   //----------------------------------------------------
   const genres = $('#genre .toggle');
@@ -321,6 +300,7 @@ function app() {
     data.cycle[index] = choix;
     fillFamilles(index);
     const [fam, dif] = data.cycle[index].split('-');
+    $('.choix-cycle:eq(' + index + ') [data-cycle]').val(data.cycle[index]);
     $('.choix-cycle:eq(' + index + ') .choix .description').text(tiles[data.genre][fam][dif]);
 
     $('.choix-cycle:eq(' + index + ') .choix .image')
@@ -414,7 +394,6 @@ function app() {
       saveData(currPage);
       loadData(numPage);
 
-      showPage(currPage, false);
       showPage(numPage);
       currPage = numPage;
     };
@@ -424,6 +403,7 @@ function app() {
   genres.click((e) => {
     selectGenre(e.target.value);
     displayPage(1);
+    fillAllFields(data);
   });
   sections.click((e) => {
     selectSection($(e.target).text());
@@ -444,10 +424,41 @@ function app() {
       displayPage(6);
     }
   });
+  $('.choix-cycle [data-cycle]').each(function (idx) {
+    $(this).keydown((e) => {
+      if (e.which === 13) {
+        displayPage(7 + idx);
+      }
+    });
+  });
   //-----------------------------------------------------
-  hideAllPages();
+  //hideAllPages();
+  const fillAllFields = (data) => {
+    $('.choix-cycle [data-cycle]').each(function () {
+      const elem = $(this);
+      for (const famille of Object.keys(tiles[data.genre])) {
+        for (const difficulte of Object.keys(tiles[data.genre][famille])) {
+          const choix = `${famille}-${difficulte}`;
+          $('<option>')
+            .val(choix)
+            .text(choix.toUpperCase())
+            .appendTo(elem);
+        }
+      }
+    });
 
-  displayPage(0);
+    selectGenre(data.genre);
+    selectSection(data.section);
+    selectClasse(data.classe);
+    selectNomPrenom(data.nomPrenom);
+    selectLycee(data.lycee);
+    selectDateEpreuve(data.dateEpreuve);
+    for (let i = 0; i < 5; i++) {
+      selectChoix(i, data.cycle[i]);
+    }
+  };
+
+  fillAllFields(data);
 }
 
 $(() => {
