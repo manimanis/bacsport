@@ -16,6 +16,7 @@ body {
     orientation: landscape;
     font-family: "Sakkal Majalla";
     font-size: 14pt;
+    margin: 0;
 }
 
 h1, h2, h3, h4 {
@@ -184,8 +185,21 @@ tr[data-familles] td, tr[data-difficultes] td {
     position: relative;
 }
 
+#header {
+    position: relative;
+}
+
 #header h1 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
     font-size: 2em;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+#header img {
+    width: 100%;
 }
 
 #genre h2, #sections h2, #classe h2, #nom h2, #lycee h2, #date-epreuve h2 {
@@ -264,7 +278,7 @@ tr[data-familles] td, tr[data-difficultes] td {
     background-color: #009688;
 }
 
-#inp-lycee, #inp-nom, #inp-date-epreuve {
+#inp-lycee, #inp-nom, #inp-date-epreuve, .choix-cycle input {
     text-align: center;
     display: block;
     margin: 0.5em 0.2em;
@@ -312,6 +326,10 @@ tr[data-familles] td, tr[data-difficultes] td {
     margin: 0.2em auto;
 }
 
+.choix-cycle [data-cycle] {
+    text-align: center;
+}
+
 .choix-cycle .choix-famille button, .choix-cycle .choix-difficulte button {
     display: block;
     flex-grow: 1;
@@ -337,17 +355,12 @@ tr[data-familles] td, tr[data-difficultes] td {
     background-color: #8bc34a;
 }
 
-.choix-cycle .choix, #last-page [data-choix] .choix {
+.choix-cycle .choix {
     position: relative;
     min-height: 7cm;
 }
 
-#last-page [data-choix] .choix {
-    border: 1px solid #333;
-    margin: 0.2em 0;
-}
-
-.choix-cycle .description, #last-page [data-choix] .description {
+.choix-cycle .description {
     position: absolute;
     text-align: center;
     top: 0;
@@ -355,20 +368,28 @@ tr[data-familles] td, tr[data-difficultes] td {
     left: 0;
 }
 
-.choix-cycle .image, #last-page [data-choix] .image {
+.choix-cycle .image {
     min-height: 7cm;
 }
 
-#last-page strong {
-    display: inline-block;
-    width: 5em;
-    margin-left: 0.7em;
-    text-align: left;
+#last-page a {
+    display: block;
+    width: 90%;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    margin: 2em auto;
+    background-color: #FF5722;
+    color: #fff;
+    border-radius: 10px;
 }
 
-#last-page [data-choix] {
-    width: 96%;
-    margin: 0.2em auto;
+#last-page a:focus {
+    outline-color: #ff9800;
+    outline-width: 2px;
+    outline-style: dashed;
 }
 
 #page-imprimee [data-image].choix {
@@ -399,6 +420,37 @@ tr[data-familles] td, tr[data-difficultes] td {
     }
     #classe .classes button {
         width: calc(100% / 6 - 0.2em);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #header, #genre, #date-epreuve {
+        width: 100%;
+    }
+    #sections .sections button {
+        width: calc(33.3% - 0.5em);
+        font-size: 1.3em;
+        height: 2.2em;
+    }
+    #date-epreuve .input-field {
+        width: 50%;
+        float: right;
+    }
+    .page {
+        width: calc(50% - 0.55em);
+        margin: 0.2em;
+        justify-content: space-evenly;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    main {
+        width: 960px;
+        margin: auto;
     }
 }
 

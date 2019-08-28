@@ -143,7 +143,7 @@ function app() {
     }
     for (let j = 0; j < 6; j++) {
       let tr = document.createElement('tr');
-      tbody.appendChild(tr);
+      let usedTds = 0;
       for (let i = 0; i < 7; i++) {
         let td = document.createElement('td');
         if (i == 0) td.className = 'end_of_week';
@@ -155,9 +155,13 @@ function app() {
             ((month < 10) ? '0' : '') + month + '/' + year;
           btn.textContent = jour;
           td.appendChild(btn);
+          usedTds += 1;
         } else {
           td.innerHTML = '&nbsp;';
         }
+      }
+      if (usedTds > 0) {
+        tbody.appendChild(tr);
       }
     }
     return table;
@@ -272,6 +276,7 @@ function app() {
             const choix = Object.keys(tiles[data.genre][famille]);
             selectChoix(index, famille + '-' + choix[0]);
           }
+          $('.choix-cycle:eq(' + index + ') [data-cycle]').focus();
         });
       if (f === selectedFamille) {
         btn.addClass('active');
@@ -290,6 +295,7 @@ function app() {
         .appendTo(diffDiv)
         .click((e) => {
           selectChoix(index, e.target.value);
+          $('.choix-cycle:eq(' + index + ') [data-cycle]').focus();
         });
       if (d === selectedDiff) {
         btn.addClass('active');
@@ -305,40 +311,7 @@ function app() {
 
     $('.choix-cycle:eq(' + index + ') .choix .image')
       .removeAttr('class')
-      .addClass(`image cycle ${data.genre} ${data.cycle[index]}`);
-  };
-  //-----------------------------------------------------
-  const selectInfos = (data) => {
-    window.localStorage.setItem('eleve', JSON.stringify(data));
-
-    const lastPageDiv = $('#last-page');
-
-    lastPageDiv.find('[data-genre]').text('تلميذ' + (data.genre === 'genre-garcon' ? '' : 'ة'));
-    lastPageDiv.find('[data-classe]').text(data.classe);
-    lastPageDiv.find('[data-nom-prenom]').text(data.nomPrenom);
-    lastPageDiv.find('[data-lycee]').text(data.lycee);
-    lastPageDiv.find('[data-date-epreuve]').text(data.dateEpreuve);
-
-    const choixDiv = lastPageDiv.find('[data-choix]');
-    let idx = 0;
-    for (const choix of data.cycle) {
-      const chParts = choix.split('-');
-      const h2 = $('<h3>')
-        .addClass('center')
-        .text('الإختيار ' + ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس'][idx])
-        .appendTo(choixDiv);
-      const ch = $('<div>')
-        .addClass('choix')
-        .appendTo(choixDiv);
-      const desc = $('<div>')
-        .addClass('description')
-        .text(tiles[data.genre][chParts[0]][chParts[1]])
-        .appendTo(ch);
-      const img = $('<div>')
-        .addClass(`image cycle ${data.genre} ${choix}`)
-        .appendTo(ch);
-      idx += 1;
-    }
+      .addClass(`image cycle ${data.genre} ${data.cycle[index].toLowerCase()}`);
   };
   //-----------------------------------------------------
   const pageManager = () => {
@@ -354,6 +327,12 @@ function app() {
         case 5:
           selectDateEpreuve(dateEpreuveInput.val());
           break;
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+          selectChoix(numPage - 6, $('.choix-cycle:eq(' + (numPage - 6) + ') [data-cycle]').val().toUpperCase());
       }
     };
     const loadData = numPage => {
@@ -384,7 +363,7 @@ function app() {
           selectChoix(numPage - 6, data.cycle[numPage - 6]);
           break;
         case 11:
-          selectInfos(data);
+          //selectInfos(data);
           break;
       }
     };
@@ -434,14 +413,14 @@ function app() {
   //-----------------------------------------------------
   //hideAllPages();
   const fillAllFields = (data) => {
-    $('.choix-cycle [data-cycle]').each(function () {
+    $('#data-cycle-list').each(function () {
       const elem = $(this);
+      elem.html('');
       for (const famille of Object.keys(tiles[data.genre])) {
         for (const difficulte of Object.keys(tiles[data.genre][famille])) {
           const choix = `${famille}-${difficulte}`;
           $('<option>')
-            .val(choix)
-            .text(choix.toUpperCase())
+            .val(choix.toUpperCase())
             .appendTo(elem);
         }
       }
