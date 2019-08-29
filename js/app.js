@@ -548,6 +548,7 @@ function app() {
     }
     const cal = createMonthCalendar(year, month);
     const calendarDiv = $('#date-epreuve .calendrier');
+    const dateEpreuveInput = $('#date-epreuve #inp-date-epreuve');
     calendarDiv.html('');
     calendarDiv[0].appendChild(cal);
     calendarDiv.find('thead button.next').click((e) => {
@@ -644,14 +645,94 @@ function app() {
     cycle.map((choix, index) => selectChoix(index, genre, choix));
   };
   //----------------------------------------------
-  selectGenre(data.genre);
-  selectSection(data.section);
-  selectClasse(data.classe);
-  selectNomPrenom(data.nomPrenom);
-  selectLycee(data.lycee);
-  selectDateEpreuve(data.dateEpreuve);
-  setCycles(data.genre, data.cycle);
-  selectTousChoix(data.genre, data.cycle);
+  const focusPage = numPage => {
+    const currPage = $(`.page:eq(${numPage})`);
+    $('html,body').animate({
+      scrollTop: currPage.offset().top
+    }, 'slow');
+    currPage.find('[data-main-focus]').focus();
+  };
+  //----------------------------------------------
+  const genreSelected = (genre) => {
+    if (data.genre !== genre) {
+      data = generateDefaults(genre);
+      selectAll(data);
+    }
+    selectGenre(genre);
+    focusPage(1);
+  };
+  const sectionSelected = (section) => {
+    selectSection(section);
+    focusPage(2);
+  };
+  const classeSelected = (classe) => {
+    selectClasse(classe);
+    focusPage(3);
+  };
+  const nomPrenomSelected = (nomPrenom) => {
+    selectNomPrenom(nomPrenom);
+    focusPage(4);
+  };
+  const lyceeSelected = (lycee) => {
+    selectLycee(lycee);
+    focusPage(5);
+  };
+  const dateEpreuveSelected = (dateEpreuve) => {
+    selectDateEpreuve(dateEpreuve);
+    focusPage(6);
+  };
+  const choixSelected = (index, genre, choix) => {
+    selectChoix(index, genre, choix);
+    focusPage(7 + index);
+  };
+  //----------------------------------------------
+  const initEventHandlers = () => {
+    $('#genre .genre button').click((e) => genreSelected(e.target.value));
+    $('#sections .sections button').click((e) => sectionSelected(e.target.value));
+    $('#classe .classes button').click((e) => classeSelected(e.target.value));
+    $('#nom #inp-nom').blur((e) => selectNomPrenom(e.target.value));
+    $('#nom #inp-nom').keydown((e) => {
+      if (e.which === 13) {
+        nomPrenomSelected(e.target.value);
+      }
+    });
+    $('#lycee #inp-lycee').blur((e) => selectLycee(e.target.value));
+    $('#lycee #inp-lycee').keydown((e) => {
+      if (e.which === 13) {
+        lyceeSelected(e.target.value);
+      }
+    });
+    $('#date-epreuve #inp-date-epreuve').blur((e) => selectDateEpreuve(e.target.value));
+    $('#date-epreuve #inp-date-epreuve').keydown((e) => {
+      if (e.which === 13) {
+        dateEpreuveSelected(e.target.value);
+      }
+    });
+    $('.choix-cycle [data-cycle]').each(function (idx) {
+      const elem = $(this);
+      elem.keydown(e => {
+        if (e.which === 13) {
+          choixSelected(idx, data.genre, e.target.value);
+          return;
+        }
+        e.preventDefault();
+      });
+    });
+  };
+  //----------------------------------------------
+  const selectAll = (data) => {
+    selectGenre(data.genre);
+    selectSection(data.section);
+    selectClasse(data.classe);
+    selectNomPrenom(data.nomPrenom);
+    selectLycee(data.lycee);
+    selectDateEpreuve(data.dateEpreuve);
+    setCycles(data.genre, data.cycle);
+    selectTousChoix(data.genre, data.cycle);
+  };
+  selectAll(data);
+  focusPage(0);
+  initEventHandlers();
 }
 
 $(() => {
