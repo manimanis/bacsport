@@ -635,6 +635,24 @@ function app() {
     data.cycle[index] = choix;
     const choixCycleDiv = $(`.choix-cycle:eq(${index})`);
     const [famille, difficulte] = choix.split('-');
+    choixCycleDiv.find('.choix-famille button').each(function () {
+      const elem = $(this);
+      const isActive = elem.text() === famille;
+      if (isActive) {
+        elem.addClass('active');
+      } else {
+        elem.removeClass('active');
+      }
+    });
+    choixCycleDiv.find('.choix-difficulte button').each(function () {
+      const elem = $(this);
+      const isActive = elem.text() === difficulte;
+      if (isActive) {
+        elem.addClass('active');
+      } else {
+        elem.removeClass('active');
+      }
+    });
     choixCycleDiv.find('[data-cycle]').val(choix);
     choixCycleDiv.find('.choix .description').text(tiles[genre][famille][difficulte]);
     choixCycleDiv.find('.choix .image')

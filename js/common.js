@@ -88,14 +88,23 @@ const sectionsArr = ['آداب', ' إق.وتصرّف', 'رياضيات', 'علو
 const genresArr = ['genre-garcon', 'genre-fille'];
 const famillesArr = ['F1', 'F2', 'F3', 'F4', 'F5'];
 const difficultesArr = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
+const VERSION = '1.0.0';
+const prenoms = {
+  'genre-garcon': ['محمد','أحمد','أنيس','اشرف','رامي','عبد الرزاق','يسري','حسن','ياسين','مالك','رضا','نجيب','هيثم','حاتم','نبيل','جمال','منذر','سمير','كمال','نجيب','نسيم','يوسف','فؤاد','معز','آزر','أسامة','أيوب','إسلام','علي','ماهر'],
+  'genre-fille': ['سناء','وفاء','يسرى','حلا','فوزية','سحر','سماح','سوسن','سمية','سهام','سامية','أروى','إبتهال','فرح','شهد','آية','صابرين','حنان','بلسم','بثينة','سنية','هاجر','فاطمة','مريم','هدى','أميرة','منى','بسمة','إسراء','شريفة']
+};
+const noms = ['ماني','بن عمر','دغرير','المهيري','اللطيف','العتيري','الجديدي','قلص','الفقيه','الحوار','الملحق','البكوش','جغام','القنطاوي','مرجان','سعيد','هلول','عاشور'];
+const lycees = ['معهد حمام سوسة', 'معهد حمام سوسة 2', 'المعهد النموذجي', 'معهد شارع الطاهر صفر', 'معهد أحمد نور الدين', 'معهد 2 مارس 1934'];
 //-----------------------------------------------------
 const generateDefaults = (genre) => {
+  const section = sectionsArr[Math.floor(Math.random()*sectionsArr.length)];
   const res = {
+    version: VERSION,
     genre: genre,
-    section: 'آداب',
-    classe: 'رابعة آداب 1',
-    nomPrenom: (genre === 'genre-garcon') ? 'سهيل التونسي' : 'ياسمين السوسي',
-    lycee: 'معهد التفوق',
+    section: section,
+    classe: `رابعة ${section} ${Math.ceil(Math.random()*7)}`,
+    nomPrenom: prenoms[genre][Math.floor(Math.random()*prenoms[genre].length)] + ' ' + noms[Math.floor(Math.random()*noms.length)],
+    lycee: lycees[Math.floor(Math.random()*lycees.length)],
     cycle: []
   };
   const now = new Date();
@@ -109,7 +118,11 @@ const generateDefaults = (genre) => {
   }
   return res;
 };
-let data = JSON.parse(window.localStorage.getItem('eleve')) || generateDefaults('genre-garcon');
+let data = JSON.parse(window.localStorage.getItem('eleve'));
+if (!data || !data.version || data.version !== VERSION) {
+  data = generateDefaults(genresArr[Math.floor(Math.random()*genresArr.length)]);
+  window.localStorage.setItem('eleve', JSON.stringify(data));
+}
 //----------------------------------------------------------------------------------------------
 const mois = [
   { shortName: 'Jan', longName: 'Janvier' },
