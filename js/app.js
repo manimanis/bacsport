@@ -668,7 +668,9 @@ function app() {
     $('html,body').animate({
       scrollTop: currPage.offset().top
     }, 'slow');
-    currPage.find('[data-main-focus]').focus();
+    currPage.find('[data-main-focus]')
+      .focus()
+      .select();
   };
   //----------------------------------------------
   const genreSelected = (genre) => {
