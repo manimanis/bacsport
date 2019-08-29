@@ -84,6 +84,11 @@ const tiles = {
   }
 };
 //-----------------------------------------------------
+const sectionsArr = ['آداب', ' إق.وتصرّف', 'رياضيات', 'علوم تقنية', 'علوم تجريبية', 'علوم إعلامية'];
+const genresArr = ['genre-garcon', 'genre-fille'];
+const famillesArr = ['F1', 'F2', 'F3', 'F4', 'F5'];
+const difficultesArr = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
+//-----------------------------------------------------
 const generateDefaults = (genre) => {
   const res = {
     genre: genre,
@@ -105,3 +110,119 @@ const generateDefaults = (genre) => {
   return res;
 };
 let data = JSON.parse(window.localStorage.getItem('eleve')) || generateDefaults('genre-garcon');
+//----------------------------------------------------------------------------------------------
+const mois = [
+  { shortName: 'Jan', longName: 'Janvier' },
+  { shortName: 'Fév', longName: 'Février' },
+  { shortName: 'Mar', longName: 'Mars' },
+  { shortName: 'Avr', longName: 'Avril' },
+  { shortName: 'Mai', longName: 'Mai' },
+  { shortName: 'Juin', longName: 'Juin' },
+  { shortName: 'Juil', longName: 'Juillet' },
+  { shortName: 'Aoû', longName: 'Août' },
+  { shortName: 'Sep', longName: 'Septembre' },
+  { shortName: 'Oct', longName: 'Octobre' },
+  { shortName: 'Nov', longName: 'Novembre' },
+  { shortName: 'Déc', longName: 'Décembre' }
+];
+const jours = [
+  { shortName: 'Dim', longName: 'Dimanche' },
+  { shortName: 'Lun', longName: 'Lundi' },
+  { shortName: 'Mar', longName: 'Mardi' },
+  { shortName: 'Mer', longName: 'Mercredi' },
+  { shortName: 'Jeu', longName: 'Jeudi' },
+  { shortName: 'Ven', longName: 'Vendredi' },
+  { shortName: 'Sam', longName: 'Samedi' },
+];
+const parseDate = (date) => {
+  const dateRegExp = /^(0[1-9]|[1-2][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+  if (!dateRegExp.test(date)) {
+    throw new Error('La date doit être valide au format jj/mm/aaaa.');
+  }
+  const [jj, mm, aaaa] = date.split('/').map(v => +v);
+  let nbj;
+  switch (mm) {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+      nbj = 31;
+      break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      nbj = 30;
+      break;
+    case 2:
+      nbj = 28 + +((aaaa % 4 !== 100 && aaaa % 4 === 0) || (aaaa % 400 === 0));
+  }
+  if (jj < 1 || jj > nbj) {
+    throw new Error('La journée doit être une valeur comprise entre 1 et ' + nbj + '.');
+  }
+  return { jour: jj, mois: mm, annee: aaaa };
+};
+function createMonthCalendar(year, month) {
+  const startMonth = new Date(year, month - 1, 1);
+  const nbJours = (new Date(year, month, 1).getTime() - startMonth.getTime()) / 86400000;
+  let dow = startMonth.getDay();
+  const table = document.createElement('table');
+  table.className = 'calendar';
+  const thead = document.createElement('thead');
+  table.appendChild(thead);
+  let tr = document.createElement('tr');
+  thead.appendChild(tr);
+  let th = document.createElement('th');
+  tr.appendChild(th);
+  let btn = document.createElement('button');
+  btn.textContent = '<';
+  btn.classList.add('next');
+  th.appendChild(btn);
+  th = document.createElement('th');
+  tr.appendChild(th);
+  th.setAttribute('colspan', 5);
+  th.innerHTML = mois[startMonth.getMonth()].longName + ' ' + year;
+  th = document.createElement('th');
+  tr.appendChild(th);
+  btn = document.createElement('button');
+  btn.textContent = '>';
+  btn.classList.add('prev');
+  th.appendChild(btn);
+  const tbody = document.createElement('tbody');
+  table.appendChild(tbody);
+  tr = document.createElement('tr');
+  tbody.appendChild(tr);
+  for (let i = 0; i < jours.length; i++) {
+    let th = document.createElement('th');
+    if (i == 0) th.className = 'end_of_week';
+    tr.appendChild(th);
+    th.innerHTML = jours[i].shortName;
+  }
+  for (let j = 0; j < 6; j++) {
+    let tr = document.createElement('tr');
+    let usedTds = 0;
+    for (let i = 0; i < 7; i++) {
+      let td = document.createElement('td');
+      if (i == 0) td.className = 'end_of_week';
+      tr.appendChild(td);
+      let jour = (j * 7 + i) - dow + 1;
+      if (jour > 0 && jour <= nbJours) {
+        const btn = document.createElement('button');
+        btn.value = ((jour < 10) ? '0' : '') + jour + '/' +
+          ((month < 10) ? '0' : '') + month + '/' + year;
+        btn.textContent = jour;
+        td.appendChild(btn);
+        usedTds += 1;
+      } else {
+        td.innerHTML = '&nbsp;';
+      }
+    }
+    if (usedTds > 0) {
+      tbody.appendChild(tr);
+    }
+  }
+  return table;
+}
