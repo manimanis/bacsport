@@ -19,6 +19,10 @@ body {
     margin: 0;
 }
 
+.motif {
+    background: transparent url(../imgs/diagonal_striped_brick.png);
+}
+
 h1, h2, h3, h4 {
     margin: 0.25em auto;
 }
@@ -285,6 +289,7 @@ tr[data-familles] td, tr[data-difficultes] td {
     padding: 0.2em;
     font-size: 2em;
     width: calc(100% - 0.9em);
+    background-color: transparent;
 }
 
 #date-epreuve .calendrier .calendar {
@@ -318,6 +323,7 @@ tr[data-familles] td, tr[data-difficultes] td {
 .page {
     /* min-height: calc(100vh - 7em); */
     margin: 0.2em 0;
+    background-color: rgba(255, 255, 255, 0.685);
 }
 
 .choix-cycle .choix-famille, .choix-cycle .choix-difficulte {
@@ -411,6 +417,9 @@ tr[data-familles] td, tr[data-difficultes] td {
 }
 
 @media screen and (min-width: 600px) {
+    #header h1 {
+        font-size: 3em;
+    }
     #genre .toggle {
         width: calc(50% - 0.5em);
     }
@@ -451,6 +460,7 @@ tr[data-familles] td, tr[data-difficultes] td {
     main {
         width: 960px;
         margin: auto;
+        box-shadow: 0px 0px 5px 2px black;
     }
 }
 

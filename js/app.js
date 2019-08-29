@@ -317,6 +317,7 @@ function app() {
   const pageManager = () => {
     let currPage = 0;
     const saveData = (numPage) => {
+      window.localStorage.setItem('eleve', JSON.stringify(data));
       switch (numPage) {
         case 3:
           selectNomPrenom(nomPrenomInput.val());
@@ -388,15 +389,24 @@ function app() {
     selectSection($(e.target).text());
     displayPage(2);
   });
+  nomPrenomInput.blur((e) => {
+    selectNomPrenom(e.target.value);
+  });
   nomPrenomInput.keydown((e) => {
     if (e.which === 13) {
       displayPage(4);
     }
   });
+  lyceeInput.blur((e) => {
+    selectLycee(e.target.value);
+  });
   lyceeInput.keydown((e) => {
     if (e.which === 13) {
       displayPage(5);
     }
+  });
+  dateEpreuveInput.blur((e) => {
+    selectDateEpreuve(e.target.value);
   });
   dateEpreuveInput.keydown((e) => {
     if (e.which === 13) {

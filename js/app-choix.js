@@ -18,7 +18,7 @@ function app() {
         .text(tiles[data.genre][famille][difficulte])
         .appendTo(dataImage);
       const img = $('<div>')
-        .addClass(`image cycle ${data.genre} ${data.cycle[i]}`)
+        .addClass(`image cycle ${data.genre} ${data.cycle[i].toLowerCase()}`)
         .appendTo(dataImage);
     }
   };
