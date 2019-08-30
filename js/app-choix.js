@@ -3,6 +3,7 @@ function app() {
   const fillTable = (data) => {
     const pageImprimee = $('#page-imprimee');
     pageImprimee.addClass(data.genre);
+    pageImprimee.find('[data-annee]').text(data.dateEpreuve.substr(6));
     pageImprimee.find('span[data-nom-prenom]').text(data.nomPrenom);
     pageImprimee.find('span[data-lycee]').text(data.lycee);
     pageImprimee.find('span[data-classe]').text(data.classe);
