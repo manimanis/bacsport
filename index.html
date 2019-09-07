@@ -169,16 +169,27 @@
     <script src="js/app.js"></script>
 
     <script>
-        const cssFiles = ['css/genre-garcon.css', 'css/genre-fille.css'];
-        Promise.all(cssFiles.map(filename => new Promise((resolve, reject) => {
-            var cssLink = document.createElement('link');
-            cssLink.rel = 'stylesheet';
-            cssLink.href = filename;
-            cssLink.type = 'text/css';
-            var godefer = document.getElementsByTagName('link')[0];
-            godefer.parentNode.insertBefore(cssLink, godefer);
-            resolve();
-        })));
+        $(() => {
+            const cssFiles = ['css/genre-garcon.css', 'css/genre-fille.css'];
+            const headtag = $('head');
+            cssFiles.forEach(filename => {
+                $.get(filename, (data) => {
+                    $('<style>')
+                        .html(data)
+                        .appendTo(headtag);
+                });
+            });
+        });
+        // Promise.all(cssFiles.map(filename => new Promise((resolve, reject) => {
+        //     var cssLink = document.createElement('link');
+        //     cssLink.rel = 'stylesheet';
+        //     cssLink.href = filename;
+        //     cssLink.type = 'text/css';
+        //     var godefer = document.getElementsByTagName('link')[0];
+        //     godefer.parentNode.insertBefore(cssLink, godefer);
+        //     console.log('loaded');
+        //     resolve();
+        // })));
     </script>
 </body>
 
