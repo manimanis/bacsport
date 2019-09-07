@@ -209,8 +209,10 @@ function app() {
       const isActive = elem.text() === difficulte;
       if (isActive) {
         elem.addClass('active');
+        elem.attr('data-main-focus', true);
       } else {
         elem.removeClass('active');
+        elem.removeAttr('data-main-focus');
       }
     });
     choixCycleDiv.find('[data-cycle]').val(choix);
@@ -290,6 +292,8 @@ function app() {
     $('#date-epreuve #inp-date-epreuve').keydown((e) => {
       if (e.which === 13) {
         dateEpreuveSelected(e.target.value);
+        e.stopPropagation();
+        e.preventDefault();
       }
     });
     $('.choix-cycle [data-cycle]').each(function (idx) {
@@ -311,14 +315,14 @@ function app() {
         const difficulte = Object.keys(tiles[data.genre][famille])[0];
         setCycle(idx, data.genre, famille);
         selectChoix(idx, data.genre, `${famille}-${difficulte}`);
-        pageDiv.find('[data-cycle]').focus();
       });
       pageDiv.find('.choix-difficulte button').click((e) => {
         const difficulte = e.target.value;
         const [oFamille, oDifficulte] = data.cycle[idx].split('-');
-        if (difficulte === oDifficulte) return;
-        selectChoix(idx, data.genre, `${oFamille}-${difficulte}`);
-        pageDiv.find('[data-cycle]').focus();
+        // if (difficulte === oDifficulte) return;
+        // selectChoix(idx, data.genre, `${oFamille}-${difficulte}`);
+        // debugger;
+        choixSelected(idx, data.genre, `${oFamille}-${difficulte}`);
       });
     });
   };
