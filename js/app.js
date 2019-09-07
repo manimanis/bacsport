@@ -242,7 +242,11 @@ function app() {
     focusPage(1);
   };
   const sectionSelected = (section) => {
+    const updateClasse = (section != data.section);
     selectSection(section);
+    if (updateClasse) {
+      selectClasse(`رابعة ${section} 1`);
+    }
     focusPage(2);
   };
   const classeSelected = (classe) => {
