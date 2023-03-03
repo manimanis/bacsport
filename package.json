@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/manimanis/bacsport#readme",
   "devDependencies": {
-    "jimp": "^0.6.4"
+    "jimp": "^0.22.7"
   }
 }
